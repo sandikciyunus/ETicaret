@@ -1,0 +1,67 @@
+﻿@model WebUI.Models.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<h1>Register User</h1>
+<hr />
+
+
+<div class="row">
+
+    <div class="col-md-8">
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Full Name</label>
+                <div class="col-md-10">
+                    <input asp-for="FullName" class="form-control" placeholder="Full Name" />
+                    @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">User Name</label>
+                <div class="col-md-10">
+                    <input asp-for="UserName" class="form-control" placeholder="User Name" />
+                    @Html.ValidationMessageFor(p => p.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Mail</label>
+                <div class="col-md-10">
+                    <input asp-for="Mail" class="form-control" placeholder="Mail" />
+                    @Html.ValidationMessageFor(p => p.Mail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Password</label>
+                <div class="col-md-10">
+                    <input asp-for="Password" class="form-control"></input>
+                    @Html.ValidationMessageFor(p => p.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">RePassword</label>
+                <div class="col-md-10">
+                    <input asp-for="RePassword" class="form-control" />
+                    @Html.ValidationMessageFor(p => p.RePassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-10 offset-md-2">
+                    <button id="btn" type="submit" value="Register" class="btn btn-primary">Create User</button>
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,36 @@
+﻿@model WebUI.Models.CategoryListViewModel
+@{
+    ViewData["Title"] = "Categories";
+}
+<h1>Admin Categories</h1>
+<a class="btn  btn-success" asp-controller="Admin" asp-action="AddCategory">Add a new category</a>
+<br />
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Name</td>
+              
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-danger btn-delete" data-id="@category.Id"
+                       data-text="Kategoriyi silmek üzeresiniz" data-url="/Admin/DeleteCategory?id=">Delete</a>
+                    <a href="~/Admin/UpdateCategory/@category.Id" class="btn btn-primary">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

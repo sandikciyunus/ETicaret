@@ -9,5 +9,6 @@ namespace WebUI.Models
     public class CategoryListViewModel
     {
        public List<Category> Categories;
+        public int CurrentCategory;
     }
 }

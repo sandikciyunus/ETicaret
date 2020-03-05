@@ -1,0 +1,35 @@
+﻿@model WebUI.Models.CategoryAddModel
+@{
+    ViewData["Title"] = "AddCategory";
+}
+
+<h1>Category Add</h1>
+<hr />
+
+<div class="row">
+
+    <div class="col-md-8">
+        <form asp-controller="Admin" asp-action="AddCategory" method="post">
+
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Name</label>
+                <div class="col-md-10">
+                    <input asp-for="category.Name" class="form-control" placeholder="Name" />
+                    @Html.ValidationMessageFor(p => p.category.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-10 offset-md-2">
+                    <button id="btn" type="submit" value="Category Add" class="btn btn-primary">Category Add</button>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

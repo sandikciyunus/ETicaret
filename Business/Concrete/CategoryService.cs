@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Messages;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -8,32 +10,55 @@ using System.Text;
 
 namespace Business.Concrete
 {
-   public class CategoryService:ICategoryService
+    public class CategoryService : ICategoryService
     {
         private ICategoryDal _categoryDal;
-        public CategoryService(ICategoryDal categoryDal)
+        private IProductDal _productDal;
+        public CategoryService(ICategoryDal categoryDal, IProductDal productDal)
         {
             _categoryDal = categoryDal;
+            _productDal = productDal;
         }
 
-        public void Add(Category category)
+        public IResult Add(Category category)
         {
             _categoryDal.Add(category);
+            return new SuccesResult(Messagess.CategoryAdded);
         }
 
-        public void Delete(Category category)
+        public IResult Delete(int id)
         {
-            _categoryDal.Delete(category);
+            try
+            {
+                var category = _categoryDal.Get(p => p.Id == id);
+                var product = _productDal.Get(p => p.CategoryId == category.Id);
+                if (product != null)
+                {
+                    return new ErrorResult(Messagess.CategoryNotDeleted);
+                }
+                _categoryDal.Delete(category);
+                return new SuccesResult(Messagess.CategoryDeleted);
+            }
+            catch (Exception e)
+            {
+                return new ErrorResult(e.Message);
+            }
         }
 
-        public List<Category> GetAll()
+        public IDataResult<Category> Get(int id)
         {
-            return _categoryDal.GetList().ToList();
+            return new SuccesDataResult<Category>(_categoryDal.Get(p => p.Id == id));
         }
 
-        public void Update(Category category)
+        public IDataResult<List<Category>> GetAll()
+        {
+            return new SuccesDataResult<List<Category>>(_categoryDal.GetList().ToList());
+        }
+
+        public IResult Update(Category category)
         {
             _categoryDal.Update(category);
+            return new SuccesResult(Messagess.CategoryUpdated);
         }
     }
 }

@@ -9,10 +9,16 @@ namespace WebUI.Services
 {
     public interface IProductApi
     {
-        [Get("/api/product/getall")]
+        [Get("/api/products/category/{id}")]
+        Task<List<Product>> GetListByCategory(int id);
+
+        [Get("/api/products")]
         Task<List<Product>> GetAll();
 
-        [Get("/api/product/get")]
+        [Get("/api/products/{id}")]
         Task<Product> Get(int id);
+
+       
+
     }
 }

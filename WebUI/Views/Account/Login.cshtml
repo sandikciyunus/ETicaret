@@ -1,0 +1,40 @@
+﻿@model WebUI.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+<h1>Login User</h1>
+<hr />
+
+
+<div class="row">
+
+    <div class="col-md-8">
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Email</label>
+                <div class="col-md-10">
+                    <input asp-for="Mail" class="form-control"  />
+                    @Html.ValidationMessageFor(p => p.Mail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Password</label>
+                <div class="col-md-10">
+                    <input asp-for="Password" class="form-control"  />
+                    @Html.ValidationMessageFor(p => p.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-10 offset-md-2">
+                    <button id="btn" type="submit" value="Login" class="btn btn-primary">Login</button>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

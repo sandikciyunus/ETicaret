@@ -22,14 +22,25 @@ namespace WebUI.Controllers
             _configuration = configuration;
           
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
           
             var productListApi = RestService.For<IProductApi>(_configuration.GetSection("MyAddress").Value);
-            var productList =  await productListApi.GetAll();
+            var productList =  await productListApi.GetListByCategory(id);
             return View(new ProductListViewModel()
             {
                 Products=productList
+            });
+        }
+
+        public async Task<IActionResult> GetAll()
+        {
+
+            var productListApi = RestService.For<IProductApi>(_configuration.GetSection("MyAddress").Value);
+            var productList = await productListApi.GetAll();
+            return View(new ProductListViewModel()
+            {
+                Products = productList
             });
         }
 

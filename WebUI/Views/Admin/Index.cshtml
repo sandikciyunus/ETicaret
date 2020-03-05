@@ -1,0 +1,42 @@
+﻿@model WebUI.Models.ProductListViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Admin Products</h1>
+<a class="btn  btn-success" asp-controller="Admin" asp-action="AddProduct">Add a new product</a>
+<br />
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>
+                    <img src="~/img/@product.ImageUrl" width="80" />
+                </td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-danger btn-delete" data-id="@product.Id"
+                       data-text="Ürünü silmek üzeresiniz" data-url="/Admin/DeleteProduct?id=">Delete</a>
+                    <a href="~/Admin/UpdateProduct/@product.Id" class="btn btn-primary">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

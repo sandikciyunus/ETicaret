@@ -1,0 +1,69 @@
+﻿@model WebUI.Models.ProductAddModel
+@{
+    ViewData["Title"] = "AddProduct";
+
+
+}
+
+
+<h1>Product Add</h1>
+<hr />
+<div class="row">
+
+    <div class="col-md-8">
+        <form asp-controller="Admin" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Name</label>
+                <div class="col-md-10">
+                    <input asp-for="Product.Name" class="form-control" placeholder="Name" />
+                    @Html.ValidationMessageFor(p => p.Product.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Category</label>
+                <div class="col-md-10">
+                    <select asp-for="Product.CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Image</label>
+                <div class="col-md-10">
+                    <input type="hidden" name="ImageUrl" value="Product.ImageUrl" />
+                    @*<input asp-for="Product.ImageUrl" class="form-control" placeholder="Image Url" />*@
+                    <input type="file" name="file" value="" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Description</label>
+                <div class="col-md-10">
+                    <textarea asp-for="Product.Description" class="form-control"></textarea>
+                    @Html.ValidationMessageFor(p => p.Product.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Price</label>
+                <div class="col-md-10">
+                    <input asp-for="Product.Price" class="form-control" placeholder="Price" />
+                    @Html.ValidationMessageFor(p => p.Product.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-10 offset-md-2">
+                    <button id="btn" type="submit" value="Product Add" class="btn btn-primary">Product Add</button>
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
