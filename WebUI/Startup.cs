@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebUI.Identity;
 using WebUI.Middlewares;
+using WebUI.SessionService;
 
 namespace WebUI
 {
@@ -36,6 +37,7 @@ namespace WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ICartSessionService, CartSessionService>();
             services.AddDbContext<ApplicationIdentityDbContext>(options =>
             options.UseSqlServer(@"Server=DESKTOP-EBEN970;Database=ShopApp;integrated security=true"));
 
@@ -76,7 +78,8 @@ namespace WebUI
                     SameSite=SameSiteMode.Strict
                 };
             });
-
+            services.AddSession();
+            services.AddDistributedMemoryCache();
             services.AddMvc();
            
         }
@@ -101,7 +104,7 @@ namespace WebUI
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
-            //SeedIdentity.Seed(userManager, roleManager, Configuration).Wait();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

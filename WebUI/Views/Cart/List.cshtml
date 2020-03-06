@@ -1,0 +1,52 @@
+﻿@model WebUI.Models.CartSummaryViewModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<table class="table">
+<tr>
+    <th>Product Image</th>
+    <th>Product Name</th>
+    <th>Unit Price</th>
+    <th>Quantity</th>
+    <th></th>
+</tr>
+@foreach (var item in Model.Cart.CartLines)
+{
+    <tr>
+        <td>
+            <img src="~/img/@item.Product.ImageUrl" width="100" />
+        </td>
+        <td>@item.Product.Name</td>
+        <td>@item.Product.Price</td>
+        <td>@item.Quantity</td>
+        <td class="text-right"><a class="btn btn-xs btn-danger" asp-controller="Cart" asp-action="Remove" asp-route-Id="@item.Product.Id"><span class="glyphicon glyphicon-remove"></span>remove from cart</a></td>
+    </tr>
+}
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        <h3>Total</h3>
+    </td>
+
+    <td class="text-right">
+        <h3>
+            <strong>@Model.Cart.Total</strong>
+        </h3>
+    </td>
+</tr>
+
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-shopping-cart"></span>Continue Shopping</a>
+    </td>
+    <td class="text-right">
+        <a asp-controller="Cart" asp-action="Complete" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-shopping-play"></span>Go To Checkout</a>
+    </td>
+</tr>
+</table>

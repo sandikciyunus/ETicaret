@@ -1,8 +1,10 @@
-﻿<nav class="nav navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">Shopping</a>
-        <ul class="navbar-nav mr-auto">
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a href="#" class="nav-link active">Home</a>
             </li>
@@ -10,43 +12,20 @@
             <li class="nav-item">
                 <a href="/Product/GetAll" class="nav-link">Products</a>
             </li>
+
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Cart</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Orders</a>
-                </li>
-
-
-
-                <li class="nav-item">
                     <a href="/Admin/Index" class="nav-link">Admin Products</a>
                 </li>
-
 
                 <li class="nav-item">
                     <a href="/Admin/Categories" class="nav-link">Admin Categories</a>
                 </li>
             }
 
-
-
-
-            @if (User.Identity.IsAuthenticated)//Login olmuşşa
-            {
-                <li class="nav-item">
-                    <a class="nav-link">@User.Identity.Name</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/Account/Logout" class="nav-link">Logout</a>
-                </li>
-            }
-            else
-            {
+               @if (!User.Identity.IsAuthenticated)
+               {
                 <li class="nav-item">
                     <a href="/Account/Login" class="nav-link">Login</a>
                 </li>
@@ -54,11 +33,29 @@
                 <li class="nav-item">
                     <a href="/Account/Register" class="nav-link">Register</a>
                 </li>
-            }
+               }
+
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.Identity.IsAuthenticated)//Login olmuşşa
+            {
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Your Cart <span class="caret"></span></a>
+                    @await Component.InvokeAsync("CartSummary")
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link">@User.Identity.Name</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/Account/Logout" class="nav-link">Logout</a>
+                </li>
 
 
+            }
 
+        </ul>
     </div>
 </nav>
-

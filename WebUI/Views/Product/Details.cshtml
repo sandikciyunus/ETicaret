@@ -16,12 +16,15 @@
      
         @*<a href="#" class="btn btn-link p-0 mb-3">@Model.Product.CategoryId</a>*@
         
-        <div class="mb-3">
-            <h4 class="text-primary mb-3">
-                @Model.Product.Price TL
-            </h4>
-            <button type="submit" class="btn btn-primary btn-lg">Add To Cart</button>
-        </div>
+    <div class="mb-3">
+        <h4 class="text-primary mb-3">
+            @Model.Product.Price TL
+        </h4>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-Id="@Model.Product.Id" class="btn btn-primary btn-sm ml-3">Add To Card</a>
+        }
+    </div>
     </div>
 </div>
 

@@ -12,7 +12,7 @@ using WebUI.Services;
 
 namespace WebUI.ViewComponents
 {
-    public class CategoryListViewComponent:ViewComponent
+    public class CategoryListViewComponent : ViewComponent
     {
         private IConfiguration _configuration;
         public CategoryListViewComponent(IConfiguration configuration)
@@ -20,9 +20,9 @@ namespace WebUI.ViewComponents
             _configuration = configuration;
         }
         public async Task<ViewViewComponentResult> InvokeAsync()
-        { 
-         var categoryListApi = RestService.For<ICategoryApi>(_configuration.GetSection("MyAddress").Value);
-        var categoryList = await categoryListApi.GetAll();
+        {
+            var categoryListApi = RestService.For<ICategoryApi>(_configuration.GetSection("MyAddress").Value);
+            var categoryList = await categoryListApi.GetAll();
             var model = new CategoryListViewModel
             {
                 Categories = categoryList,
@@ -30,6 +30,6 @@ namespace WebUI.ViewComponents
             };
             return View(model);
         }
-       
-        }
+
     }
+}

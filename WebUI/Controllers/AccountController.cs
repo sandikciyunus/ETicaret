@@ -80,7 +80,7 @@ namespace WebUI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return Redirect("~/");
+            return Redirect("Login");
         }
 
     }

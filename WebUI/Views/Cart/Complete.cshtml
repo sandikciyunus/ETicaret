@@ -1,0 +1,49 @@
+﻿@model WebUI.Models.ShippingDetailsViewModel
+@{
+    ViewData["Title"] = "Complete";
+}
+
+<h2>Shipping Details</h2>
+
+<form asp-controller="Cart" asp-action="Complete" method="post">
+    <div class="form-group">
+        <label asp-for="shippingDetails.FirstName"></label>
+        <input asp-for="shippingDetails.FirstName" class="form-control" placeholder="First Name" />
+        <span asp-validation-for="shippingDetails.FirstName"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="shippingDetails.LastName"></label>
+        <input asp-for="shippingDetails.LastName" class="form-control" placeholder="Last Name" />
+        <span asp-validation-for="shippingDetails.LastName"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="shippingDetails.Email"></label>
+        <input asp-for="shippingDetails.Email" class="form-control" placeholder="Email" />
+        <span asp-validation-for="shippingDetails.Email"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="shippingDetails.City"></label>
+        <input asp-for="shippingDetails.City" class="form-control" placeholder="City" />
+        <span asp-validation-for="shippingDetails.City"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="shippingDetails.Address"></label>
+        <input asp-for="shippingDetails.Address" class="form-control" placeholder="Address" />
+        <span asp-validation-for="shippingDetails.Address"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="shippingDetails.Age"></label>
+        <input asp-for="shippingDetails.Age" class="form-control" placeholder="Age" />
+        <span asp-validation-for="shippingDetails.Age"></span>
+    </div>
+
+    <input type="submit" value="Complete Shopping" class="btn btn-xs btn-success" />
+
+</form>
+
+
